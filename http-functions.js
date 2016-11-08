@@ -1,10 +1,6 @@
-module.exports = function getHTML (options, callback) {
-
-
-
-function getHTML(options, callback) {
+function getHTML (options, callback) {
   var https = require('https');
-  var buffer = {}
+  var buffer = "";
   var obj = options
   https.get(obj, function(response) {
     response.setEncoding('utf8');
@@ -13,27 +9,9 @@ function getHTML(options, callback) {
 
     });
     response.on('end', function() {
-      printHTML(buffer)
-      console.log('end');
-
-
+      callback(buffer);
     });
   });
-
 }
 
-function printHTML(html) {
-  console.log(html);
-}
-
-var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step1.html',
-  };
-
-
-
-
-getHTML(requestOptions, printHTML)
-
-};
+module.exports = getHTML;
